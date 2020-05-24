@@ -1,0 +1,13 @@
+.counter {
+  max-width: 500px;
+  padding: 10px;
+  margin: 35px auto;
+  box-sizing: border-box;
+}
+
+.counterBtns {
+  margin-left: -1.5%;
+  margin-right: -1.5%;
+  margin-top: 8px;
+  font-size: 0;
+}

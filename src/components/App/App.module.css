@@ -1,0 +1,13 @@
+h1 {
+  font-size: 57px;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 span {
+  display: block;
+  font-size: 25px;
+  font-weight: 400;
+  color: #ccc;
+  font-style: italic;
+}
