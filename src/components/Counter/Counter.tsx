@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styles from './Counter.module.css';
 import Button from './Button/Button';
 import CountValue from './CountValue/CountValue';
