@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
-import './App.module.css';
+import styles from './App.module.css';
 import Counter from '../Counter/Counter';
+import CounterValues from '../CounterValues/CounterValues';
 import Footer from '../Footer/Footer';
 
-
 function App() {
-  // init state = 0
-  const [count, setCount] = useState(0);
 
-  // Increment Count
-  function incrementCount() {
-    setCount(count + 1)
-  }
-
-  // Increment Count
-  function decrementCount() {
-    setCount(count - 1)
-  }
-
-  // Reset Count
-  function resetCount() {
-    setCount(0)
-  }
+  const [ maxCountValue, setMaxCountValue ] = useState( 5 );
+  const [ minCountValue, setMinCountValue ] = useState( 0 );
+  const [ count, setCount ] = useState( minCountValue );
 
   return (
+
     <div className="App">
-      <h1>Counter <span>(until 5)</span></h1>
-      <Counter
-        count={count}
-        incrementCount={incrementCount}
-        decrementCount={decrementCount}
-        resetCount={resetCount} />
+      <h1>Counter</h1>
+
+      <div className={ styles.appRow }>
+
+        <div className={ styles.col }>
+          <CounterValues
+            minValue={ minCountValue }
+            maxValue={ maxCountValue }
+            setCount={ setCount }
+            setMinCountValue={ setMinCountValue }
+            setMaxCountValue={ setMaxCountValue } />
+        </div>
+
+        <div className={ styles.col }>
+          <Counter
+            minValue={ minCountValue }
+            maxValue={ maxCountValue }
+            count={ count }
+            setCount={ setCount } />
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
