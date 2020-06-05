@@ -4,6 +4,7 @@ import Counter from '../Counter/Counter';
 import CounterValues from '../CounterValues/CounterValues';
 import Footer from '../Footer/Footer';
 
+
 export const startMinValue = 0;
 export const startMaxValue = 0;
 

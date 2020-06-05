@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import styles from './CounterValues.module.css';
 import Button from '../common/Button/Button';
 import Value from './Value/Value';
@@ -10,17 +10,27 @@ type CounterValuesType = {
   setMinCountValue: ( value: number ) => void;
   setMaxCountValue: ( value: number ) => void;
 };
-const CounterValues = ( props: CounterValuesType ) => {
 
-  // Change min value
-  const [ inputMinValue, setInputMinValue ] = useState( props.minValue );
+const CounterValues = ( props: CounterValuesType ) => {
+  const [ inputMinValue, setInputMinValue ] = useState(
+    Number( localStorage.getItem( 'minCountValueLocalStorage' ) || props.minValue ) );
+
+  useEffect( () => {
+    localStorage.setItem( 'minCountValueLocalStorage', inputMinValue.toString() );
+  }, [ inputMinValue ] );
+
+
+  const [ inputMaxValue, setInputMaxValue ] = useState(
+    Number( localStorage.getItem( 'maxCountValueLocalStorage' ) || props.maxValue ) );
+
+  useEffect( () => {
+    localStorage.setItem( 'maxCountValueLocalStorage', inputMaxValue.toString() );
+  }, [ inputMaxValue ] );
+
 
   const onChangeMinValueHadler = ( e: ChangeEvent<HTMLInputElement> ) => {
     setInputMinValue( Number( e.currentTarget.value ) );
   };
-
-  // Change max value
-  const [ inputMaxValue, setInputMaxValue ] = useState( props.maxValue );
 
   const onChangeMaxValueHadler = ( e: ChangeEvent<HTMLInputElement> ) => {
     setInputMaxValue( Number( e.currentTarget.value ) );
