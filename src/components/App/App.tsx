@@ -4,10 +4,13 @@ import Counter from '../Counter/Counter';
 import CounterValues from '../CounterValues/CounterValues';
 import Footer from '../Footer/Footer';
 
+export const startMinValue = 0;
+export const startMaxValue = 0;
+
 function App() {
 
-  const [ maxCountValue, setMaxCountValue ] = useState( 5 );
-  const [ minCountValue, setMinCountValue ] = useState( 0 );
+  const [ maxCountValue, setMaxCountValue ] = useState( startMaxValue );
+  const [ minCountValue, setMinCountValue ] = useState( startMinValue );
   const [ count, setCount ] = useState( minCountValue );
 
   return (

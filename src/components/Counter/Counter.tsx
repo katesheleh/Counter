@@ -31,13 +31,16 @@ const Counter = ( props: CounterType ) => {
   return (
     <div className={ styles.counter }>
 
-      <CountValue value={ props.count } minValue={ props.minValue } maxValue={ props.maxValue } />
+      <CountValue
+        value={ props.count }
+        minValue={ props.minValue }
+        maxValue={ props.maxValue } />
 
       <div className={ styles.counterBtns }>
         <Button
           title='Increment'
           action={ incrementCount }
-          disabled={ props.count === props.maxValue ? true : false } />
+          disabled={ props.count === props.maxValue || props.minValue > props.maxValue ? true : false } />
 
         <Button
           title='Decrement'
