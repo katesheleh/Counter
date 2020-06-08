@@ -11,8 +11,6 @@ type CounterType = {
 };
 
 const Counter = ( props: CounterType ) => {
-  // init state = 0
-
   // Increment Count
   function incrementCount() {
     props.setCount( props.count + 1 );
@@ -25,7 +23,7 @@ const Counter = ( props: CounterType ) => {
 
   // Reset Count
   function resetCount() {
-    props.setCount( 0 );
+    props.setCount( props.minValue );
   }
 
   return (

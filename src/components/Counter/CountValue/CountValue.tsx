@@ -15,7 +15,7 @@ const CountValue = ( props: CountValue ) => {
     >
       {
         ( props.minValue ) === props.maxValue
-          ? <p className={ styles.startText }>Enter values and press "Set"</p>
+          ? <p className={ styles.startText }>Enter correct values and press "Set".</p>
 
           : ( props.minValue > props.maxValue
             ? <p className={ styles.warningText }>Min value can't be more than Max value</p>
@@ -23,7 +23,7 @@ const CountValue = ( props: CountValue ) => {
           )
       }
 
-    </div>
+    </div >
   );
 };
 

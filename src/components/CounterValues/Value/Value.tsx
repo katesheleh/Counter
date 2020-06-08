@@ -5,6 +5,7 @@ type ValueType = {
   title: string;
   value: any;
   onChange: any;
+  equal: boolean;
 };
 
 const Value = ( props: ValueType ) => {
@@ -16,7 +17,9 @@ const Value = ( props: ValueType ) => {
         type="number"
         value={ props.value }
         onChange={ props.onChange }
-        className={ styles.input } />
+        className={ props.equal
+          ? `${ styles.input } ${ styles.equal }`
+          : `${ styles.input } ` } />
     </div>
   );
 };

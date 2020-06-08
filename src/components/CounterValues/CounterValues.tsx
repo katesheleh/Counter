@@ -12,28 +12,42 @@ type CounterValuesType = {
 };
 
 const CounterValues = ( props: CounterValuesType ) => {
-  const [ inputMinValue, setInputMinValue ] = useState(
-    Number( localStorage.getItem( 'minCountValueLocalStorage' ) || props.minValue ) );
 
-  useEffect( () => {
-    localStorage.setItem( 'minCountValueLocalStorage', inputMinValue.toString() );
-  }, [ inputMinValue ] );
+  let min = Number( localStorage.getItem( 'inputMinValue' ) );
+  let max = Number( localStorage.getItem( 'inputMaxValue' ) );
 
+  const [ inputMinValue, setInputMinValue ] = useState( min || props.minValue );
+  const [ inputMaxValue, setInputMaxValue ] = useState( max || props.maxValue );
+  const [ equalValue, setEqualValue ] = useState( min >= max );
 
-  const [ inputMaxValue, setInputMaxValue ] = useState(
-    Number( localStorage.getItem( 'maxCountValueLocalStorage' ) || props.maxValue ) );
+  // SECOND WAY to save equalValue:
+  // const [ equalValue, setEqualValue ] = useState( false );
+  // useEffect( () => {
+  //   if ( inputMinValue >= inputMaxValue ) {
+  //     setEqualValue( true );
+  //   }
+  // }, [] );
 
-  useEffect( () => {
-    localStorage.setItem( 'maxCountValueLocalStorage', inputMaxValue.toString() );
-  }, [ inputMaxValue ] );
-
+  useEffect( () => { localStorage.setItem( 'inputMinValue', inputMinValue.toString() ); }, [ inputMinValue ] );
+  useEffect( () => { localStorage.setItem( 'inputMaxValue', inputMaxValue.toString() ); }, [ inputMaxValue ] );
+  useEffect( () => { localStorage.setItem( 'equalValue', equalValue.toString() ); }, [ equalValue ] );
 
   const onChangeMinValueHadler = ( e: ChangeEvent<HTMLInputElement> ) => {
-    setInputMinValue( Number( e.currentTarget.value ) );
+    if ( +e.currentTarget.value >= inputMaxValue ) {
+      setEqualValue( true );
+    } else {
+      setEqualValue( false );
+    }
+    setInputMinValue( +e.currentTarget.value );
   };
 
   const onChangeMaxValueHadler = ( e: ChangeEvent<HTMLInputElement> ) => {
-    setInputMaxValue( Number( e.currentTarget.value ) );
+    if ( +e.currentTarget.value === inputMinValue ) {
+      setEqualValue( true );
+    } else {
+      setEqualValue( false );
+    }
+    setInputMaxValue( +e.currentTarget.value );
   };
 
   // Set updated min / max values on Click
@@ -50,19 +64,21 @@ const CounterValues = ( props: CounterValuesType ) => {
         <Value
           title='Min value'
           value={ inputMinValue }
-          onChange={ onChangeMinValueHadler } />
+          onChange={ onChangeMinValueHadler }
+          equal={ equalValue } />
 
         <Value
           title='Max value'
           value={ inputMaxValue }
-          onChange={ onChangeMaxValueHadler } />
+          onChange={ onChangeMaxValueHadler }
+          equal={ equalValue } />
       </div>
 
       <div className={ styles.counterValuesCol }>
         <Button
           title='Set'
           action={ setNewValues }
-          disabled={ false } />
+          disabled={ equalValue } />
       </div>
     </div>
   );

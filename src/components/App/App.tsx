@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './App.module.css';
 import Counter from '../Counter/Counter';
 import CounterValues from '../CounterValues/CounterValues';
@@ -10,12 +10,15 @@ export const startMaxValue = 0;
 
 function App() {
 
-  const [ maxCountValue, setMaxCountValue ] = useState( startMaxValue );
-  const [ minCountValue, setMinCountValue ] = useState( startMinValue );
-  const [ count, setCount ] = useState( minCountValue );
+  const [ minCountValue, setMinCountValue ] = useState( Number( localStorage.getItem( 'minCountValue' ) || startMinValue ) );
+  const [ maxCountValue, setMaxCountValue ] = useState( Number( localStorage.getItem( 'maxCountValue' ) || startMaxValue ) );
+  const [ count, setCount ] = useState( Number( localStorage.getItem( 'count' ) || minCountValue ) );
+
+  useEffect( () => { localStorage.setItem( 'minCountValue', minCountValue.toString() ); }, [ minCountValue ] );
+  useEffect( () => { localStorage.setItem( 'maxCountValue', maxCountValue.toString() ); }, [ maxCountValue ] );
+  useEffect( () => { localStorage.setItem( 'count', count.toString() ); }, [ count ] );
 
   return (
-
     <div className="App">
       <h1>Counter</h1>
 
