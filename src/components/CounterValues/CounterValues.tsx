@@ -1,87 +1,73 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, {useState, ChangeEvent} from 'react';
 import styles from './CounterValues.module.css';
 import Button from '../common/Button/Button';
 import Value from './Value/Value';
 
 type CounterValuesType = {
-  minValue: number;
-  maxValue: number;
-  setCount: ( value: number ) => void;
-  setMinCountValue: ( value: number ) => void;
-  setMaxCountValue: ( value: number ) => void;
+	minValue: number;
+	maxValue: number;
+	setCount: (value: number) => void;
+	setMinCountValue: (value: number) => void;
+	setMaxCountValue: (value: number) => void;
 };
 
-const CounterValues = ( props: CounterValuesType ) => {
+const CounterValues = (props: CounterValuesType) => {
+	const {minValue: inputMinValue, maxValue: inputMaxValue} = props
 
-  let min = Number( localStorage.getItem( 'inputMinValue' ) );
-  let max = Number( localStorage.getItem( 'inputMaxValue' ) );
+	const [equalValue, setEqualValue] = useState(inputMinValue >= inputMaxValue);
 
-  const [ inputMinValue, setInputMinValue ] = useState( min || props.minValue );
-  const [ inputMaxValue, setInputMaxValue ] = useState( max || props.maxValue );
-  const [ equalValue, setEqualValue ] = useState( min >= max );
+	const onChangeMinValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
+		if (+e.currentTarget.value >= inputMaxValue) {
+			setEqualValue(true);
+		} else {
+			setEqualValue(false);
+		}
+		props.setMinCountValue(+e.currentTarget.value);
+		props.setCount(inputMinValue);
+	};
 
-  // SECOND WAY to save equalValue:
-  // const [ equalValue, setEqualValue ] = useState( false );
-  // useEffect( () => {
-  //   if ( inputMinValue >= inputMaxValue ) {
-  //     setEqualValue( true );
-  //   }
-  // }, [] );
+	const onChangeMaxValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
+		if (+e.currentTarget.value === inputMinValue) {
+			setEqualValue(true);
+		} else {
+			setEqualValue(false);
+		}
+		props.setMaxCountValue(+e.currentTarget.value);
+		props.setCount(inputMinValue);
+	};
 
-  useEffect( () => { localStorage.setItem( 'inputMinValue', inputMinValue.toString() ); }, [ inputMinValue ] );
-  useEffect( () => { localStorage.setItem( 'inputMaxValue', inputMaxValue.toString() ); }, [ inputMaxValue ] );
-  useEffect( () => { localStorage.setItem( 'equalValue', equalValue.toString() ); }, [ equalValue ] );
+	// Set updated min / max values on Click
+	function setNewValues() {
+		props.setCount(inputMinValue);
+		props.setMinCountValue(inputMinValue);
+		props.setMaxCountValue(inputMaxValue);
+	}
 
-  const onChangeMinValueHadler = ( e: ChangeEvent<HTMLInputElement> ) => {
-    if ( +e.currentTarget.value >= inputMaxValue ) {
-      setEqualValue( true );
-    } else {
-      setEqualValue( false );
-    }
-    setInputMinValue( +e.currentTarget.value );
-  };
+	return (
+			<div className={styles.counterValues}>
 
-  const onChangeMaxValueHadler = ( e: ChangeEvent<HTMLInputElement> ) => {
-    if ( +e.currentTarget.value === inputMinValue ) {
-      setEqualValue( true );
-    } else {
-      setEqualValue( false );
-    }
-    setInputMaxValue( +e.currentTarget.value );
-  };
+				<div className={styles.counterValuesInnerWrap}>
+					<Value
+							title='Min value'
+							value={inputMinValue}
+							onChange={onChangeMinValueHadler}
+							equal={equalValue}/>
 
-  // Set updated min / max values on Click
-  function setNewValues() {
-    props.setCount( inputMinValue );
-    props.setMinCountValue( inputMinValue );
-    props.setMaxCountValue( inputMaxValue );
-  }
+					<Value
+							title='Max value'
+							value={inputMaxValue}
+							onChange={onChangeMaxValueHadler}
+							equal={equalValue}/>
+				</div>
 
-  return (
-    <div className={ styles.counterValues }>
-
-      <div className={ styles.counterValuesInnerWrap }>
-        <Value
-          title='Min value'
-          value={ inputMinValue }
-          onChange={ onChangeMinValueHadler }
-          equal={ equalValue } />
-
-        <Value
-          title='Max value'
-          value={ inputMaxValue }
-          onChange={ onChangeMaxValueHadler }
-          equal={ equalValue } />
-      </div>
-
-      <div className={ styles.counterValuesCol }>
-        <Button
-          title='Set'
-          action={ setNewValues }
-          disabled={ equalValue } />
-      </div>
-    </div>
-  );
+				<div className={styles.counterValuesCol}>
+					<Button
+							title='Set'
+							action={setNewValues}
+							disabled={equalValue}/>
+				</div>
+			</div>
+	);
 };
 
 export default CounterValues;

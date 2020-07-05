@@ -4,54 +4,41 @@ import Button from '../common/Button/Button';
 import CountValue from './CountValue/CountValue';
 
 type CounterType = {
-  maxValue: number;
-  minValue: number;
-  count: number;
-  setCount: ( value: number ) => void;
+	maxValue: number;
+	minValue: number;
+	count: number;
+	incrementCount: () => void;
+	decrementCount: () => void;
+	resetCount: (value: number) => void;
 };
 
-const Counter = ( props: CounterType ) => {
-  // Increment Count
-  function incrementCount() {
-    props.setCount( props.count + 1 );
-  }
+const Counter = (props: CounterType) => {
+	return (
+			<div className={styles.counter}>
 
-  // Increment Count
-  function decrementCount() {
-    props.setCount( props.count - 1 );
-  }
+				<CountValue
+						value={props.count}
+						minValue={props.minValue}
+						maxValue={props.maxValue}/>
 
-  // Reset Count
-  function resetCount() {
-    props.setCount( props.minValue );
-  }
+				<div className={styles.counterBtns}>
+					<Button
+							title='Increment'
+							action={props.incrementCount}
+							disabled={props.count === props.maxValue || props.minValue > props.maxValue ? true : false}/>
 
-  return (
-    <div className={ styles.counter }>
+					<Button
+							title='Decrement'
+							action={props.decrementCount}
+							disabled={props.count === props.minValue ? true : false}/>
 
-      <CountValue
-        value={ props.count }
-        minValue={ props.minValue }
-        maxValue={ props.maxValue } />
-
-      <div className={ styles.counterBtns }>
-        <Button
-          title='Increment'
-          action={ incrementCount }
-          disabled={ props.count === props.maxValue || props.minValue > props.maxValue ? true : false } />
-
-        <Button
-          title='Decrement'
-          action={ decrementCount }
-          disabled={ props.count === props.minValue ? true : false } />
-
-        <Button
-          title='Reset'
-          action={ resetCount }
-          disabled={ props.count === props.minValue ? true : false } />
-      </div>
-    </div>
-  );
+					<Button
+							title='Reset'
+							action={() => props.resetCount(props.minValue)}
+							disabled={props.count === props.minValue ? true : false}/>
+				</div>
+			</div>
+	);
 };
 
 export default Counter;

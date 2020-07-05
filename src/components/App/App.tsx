@@ -1,50 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './App.module.css';
 import Counter from '../Counter/Counter';
 import CounterValues from '../CounterValues/CounterValues';
 import Footer from '../Footer/Footer';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from '../../state/store';
+import {
+	SetMaxCountValueAC, SetMinCountValueAC, StateType, decrementCountAC,
+	incrementCountAC, resetCountAC, setCountAC
+} from '../../state/counter-reducer';
 
-
-export const startMinValue = 0;
-export const startMaxValue = 0;
 
 function App() {
+	let counterValues = useSelector<AppRootStateType, StateType>(state => state.counterValues)
+	let dispatch = useDispatch()
 
-  const [ minCountValue, setMinCountValue ] = useState( Number( localStorage.getItem( 'minCountValue' ) || startMinValue ) );
-  const [ maxCountValue, setMaxCountValue ] = useState( Number( localStorage.getItem( 'maxCountValue' ) || startMaxValue ) );
-  const [ count, setCount ] = useState( Number( localStorage.getItem( 'count' ) || minCountValue ) );
+	const setMinCountValue = (value: number) => {
+		dispatch(SetMinCountValueAC(value))
+	}
 
-  useEffect( () => { localStorage.setItem( 'minCountValue', minCountValue.toString() ); }, [ minCountValue ] );
-  useEffect( () => { localStorage.setItem( 'maxCountValue', maxCountValue.toString() ); }, [ maxCountValue ] );
-  useEffect( () => { localStorage.setItem( 'count', count.toString() ); }, [ count ] );
+	const setMaxCountValue = (value: number) => {
+		dispatch(SetMaxCountValueAC(value))
+	}
 
-  return (
-    <div className="App">
-      <h1>Counter</h1>
+	const setCount = (value: number) => {
+		dispatch(setCountAC(value))
+	}
 
-      <div className={ styles.appRow }>
+	const incrementCount = () => {
+		dispatch(incrementCountAC())
+	}
 
-        <div className={ styles.col }>
-          <CounterValues
-            minValue={ minCountValue }
-            maxValue={ maxCountValue }
-            setCount={ setCount }
-            setMinCountValue={ setMinCountValue }
-            setMaxCountValue={ setMaxCountValue } />
-        </div>
+	const decrementCount = () => {
+		dispatch(decrementCountAC())
+	}
 
-        <div className={ styles.col }>
-          <Counter
-            minValue={ minCountValue }
-            maxValue={ maxCountValue }
-            count={ count }
-            setCount={ setCount } />
-        </div>
-      </div>
+	const resetCount = (value: number) => {
+		dispatch(resetCountAC(value))
+	}
 
-      <Footer />
-    </div>
-  );
+	return (
+			<div className="App">
+				<h1>Counter</h1>
+
+				<div className={styles.appRow}>
+
+					<div className={styles.col}>
+						<CounterValues
+								minValue={counterValues.startMinValue}
+								maxValue={counterValues.startMaxValue}
+								setCount={setCount}
+								setMinCountValue={setMinCountValue}
+								setMaxCountValue={setMaxCountValue}/>
+					</div>
+
+					<div className={styles.col}>
+						<Counter
+								minValue={counterValues.startMinValue}
+								maxValue={counterValues.startMaxValue}
+								count={counterValues.count}
+								incrementCount={incrementCount}
+								decrementCount={decrementCount}
+								resetCount={resetCount}
+						/>
+					</div>
+				</div>
+
+				<Footer/>
+			</div>
+	);
 }
 
 export default App;
