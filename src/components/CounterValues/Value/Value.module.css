@@ -1,23 +1,23 @@
 .title {
-  font-size: 16px;
-  line-height: 1;
-  font-weight: 400;
-  margin-top: 0;
-  margin-bottom: 10px;
-  text-align: left;
+	font-size: 16px;
+	line-height: 1;
+	font-weight: 400;
+	margin-top: 0;
+	margin-bottom: 10px;
+	text-align: left;
 }
 
 .input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  height: 43px;
-  font-size: 17px;
-  font-weight: 600;
-  color: #2E3036;
-  font-family: 'Open Sans', sans-serif;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	height: 43px;
+	font-size: 17px;
+	font-weight: 600;
+	color: #2E3036;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .equal {
-  background: rgb(230, 136, 136);
+	background: rgb(230, 136, 136);
 }

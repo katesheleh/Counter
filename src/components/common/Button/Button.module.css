@@ -1,42 +1,42 @@
 button {
-  display: inline-block;
-  padding: 10px 10px;
-  width: 31%;
-  border: none;
-  margin: 0 1% 0 1%;
-  color: #fff;
-  background: #a7cb00;
-  font-size: 17px;
-  cursor: pointer;
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
-  box-shadow: 4px 5px 3px 0 rgba(35, 36, 38, 1);
-  transition: all 0.2s ease;
+	display: inline-block;
+	padding: 10px 10px;
+	width: 31%;
+	border: none;
+	margin: 0 1% 0 1%;
+	color: #fff;
+	background: #a7cb00;
+	font-size: 17px;
+	cursor: pointer;
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+	box-shadow: 4px 5px 3px 0 rgba(35, 36, 38, 1);
+	transition: all 0.2s ease;
 }
 
 button:hover {
-  background: #8aa805;
+	background: #8aa805;
 }
 
 button:active {
-  box-shadow: none;
-  background: #8aa805;
+	box-shadow: none;
+	background: #8aa805;
 }
 
 button:focus {
-  outline: none;
+	outline: none;
 }
 
 button.btnDisabled {
-  background: #ccc;
-  opacity: 0.3;
-  cursor: default;
-  box-shadow: none;
+	background: #ccc;
+	opacity: 0.3;
+	cursor: default;
+	box-shadow: none;
 }
 
 @media (max-width: 450px) {
-  button {
-    font-size: 13px;
-    padding: 10px 5px;
-  }
+	button {
+		font-size: 13px;
+		padding: 10px 5px;
+	}
 }

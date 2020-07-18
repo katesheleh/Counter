@@ -1,15 +1,15 @@
-import React, {useState, ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import styles from './CounterValues.module.css';
 import Button from '../common/Button/Button';
 import Value from './Value/Value';
 
 type CounterValuesType = {
-	minValue: number;
-	maxValue: number;
-	setCount: (value: number) => void;
-	setMinCountValue: (value: number) => void;
-	setMaxCountValue: (value: number) => void;
-};
+	minValue: number
+	maxValue: number
+	setCount: (value: number) => void
+	setMinCountValue: (value: number) => void
+	setMaxCountValue: (value: number) => void
+}
 
 const CounterValues = (props: CounterValuesType) => {
 	const {minValue: inputMinValue, maxValue: inputMaxValue} = props
@@ -18,13 +18,12 @@ const CounterValues = (props: CounterValuesType) => {
 
 	const onChangeMinValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (+e.currentTarget.value >= inputMaxValue) {
-			setEqualValue(true);
+			setEqualValue(true)
 		} else {
-			setEqualValue(false);
+			setEqualValue(false)
 		}
-		props.setMinCountValue(+e.currentTarget.value);
-		props.setCount(inputMinValue);
-	};
+		props.setMinCountValue(+e.currentTarget.value)
+	}
 
 	const onChangeMaxValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
 		if (+e.currentTarget.value === inputMinValue) {
@@ -33,7 +32,6 @@ const CounterValues = (props: CounterValuesType) => {
 			setEqualValue(false);
 		}
 		props.setMaxCountValue(+e.currentTarget.value);
-		props.setCount(inputMinValue);
 	};
 
 	// Set updated min / max values on Click
@@ -67,7 +65,7 @@ const CounterValues = (props: CounterValuesType) => {
 							disabled={equalValue}/>
 				</div>
 			</div>
-	);
-};
+	)
+}
 
 export default CounterValues;

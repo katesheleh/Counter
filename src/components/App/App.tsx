@@ -6,8 +6,13 @@ import Footer from '../Footer/Footer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../state/store';
 import {
-	SetMaxCountValueAC, SetMinCountValueAC, StateType, decrementCountAC,
-	incrementCountAC, resetCountAC, setCountAC
+	decrementCountAC,
+	incrementCountAC,
+	resetCountAC,
+	setCountAC,
+	SetMaxCountValueAC,
+	SetMinCountValueAC,
+	StateType
 } from '../../state/counter-reducer';
 
 
@@ -68,7 +73,7 @@ function App() {
 
 				<Footer/>
 			</div>
-	);
+	)
 }
 
 export default App;

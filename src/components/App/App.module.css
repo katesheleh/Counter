@@ -1,50 +1,50 @@
 h1 {
-  font-size: 57px;
-  font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
+	font-size: 57px;
+	font-weight: 600;
+	font-family: 'Open Sans', sans-serif;
 }
 
 h1 span {
-  display: block;
-  font-size: 25px;
-  font-weight: 400;
-  color: #ccc;
-  font-style: italic;
+	display: block;
+	font-size: 25px;
+	font-weight: 400;
+	color: #ccc;
+	font-style: italic;
 }
 
 .appRow {
-  max-width: 1000px;
-  margin: 10px auto 35px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  border: 5px solid #fff;
+	max-width: 1000px;
+	margin: 10px auto 35px auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 20px;
+	border: 5px solid #fff;
 }
 
 .col {
-  width: 50%;
-  padding: 10px;
+	width: 50%;
+	padding: 10px;
 }
 
 @media (max-width: 1024px) {
-  .appRow {
-    padding: 0;
-    border: transparent;
-  }
+	.appRow {
+		padding: 0;
+		border: transparent;
+	}
 
-  .col {
-    width: 100%;
-  }
+	.col {
+		width: 100%;
+	}
 }
 
 @media (max-width: 450px) {
-  h1 {
-    margin-bottom: 20px;
-  }
+	h1 {
+		margin-bottom: 20px;
+	}
 
-  .col {
-    padding-bottom: 0;
-  }
+	.col {
+		padding-bottom: 0;
+	}
 }

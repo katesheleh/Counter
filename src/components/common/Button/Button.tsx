@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './Button.module.css';
 
 type ButtonType = {
-	title: string;
-	action: () => void;
-	disabled: boolean;
-};
+	title: string
+	action: () => void
+	disabled: boolean
+}
 
 const Button = (props: ButtonType) => {
 	return (
@@ -16,7 +16,7 @@ const Button = (props: ButtonType) => {
 			>
 				{props.title}
 			</button>
-	);
-};
+	)
+}
 
 export default Button;
