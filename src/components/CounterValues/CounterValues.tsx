@@ -12,33 +12,21 @@ type CounterValuesType = {
 }
 
 const CounterValues = (props: CounterValuesType) => {
-	const {minValue: inputMinValue, maxValue: inputMaxValue} = props
 
-	const [equalValue, setEqualValue] = useState(inputMinValue >= inputMaxValue);
+	const [equalValue, setEqualValue] = useState(true)
 
 	const onChangeMinValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
-		if (+e.currentTarget.value >= inputMaxValue) {
-			setEqualValue(true)
-		} else {
-			setEqualValue(false)
-		}
+		+e.currentTarget.value >= props.maxValue ? setEqualValue(true) : setEqualValue(false)
 		props.setMinCountValue(+e.currentTarget.value)
 	}
 
 	const onChangeMaxValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
-		if (+e.currentTarget.value === inputMinValue) {
-			setEqualValue(true);
-		} else {
-			setEqualValue(false);
-		}
+		+e.currentTarget.value <= props.minValue ? setEqualValue(true) : setEqualValue(false)
 		props.setMaxCountValue(+e.currentTarget.value);
-	};
+	}
 
-	// Set updated min / max values on Click
 	function setNewValues() {
-		props.setCount(inputMinValue);
-		props.setMinCountValue(inputMinValue);
-		props.setMaxCountValue(inputMaxValue);
+		props.setCount(props.minValue);
 	}
 
 	return (
@@ -47,13 +35,13 @@ const CounterValues = (props: CounterValuesType) => {
 				<div className={styles.counterValuesInnerWrap}>
 					<Value
 							title='Min value'
-							value={inputMinValue}
+							value={props.minValue}
 							onChange={onChangeMinValueHadler}
 							equal={equalValue}/>
 
 					<Value
 							title='Max value'
-							value={inputMaxValue}
+							value={props.maxValue}
 							onChange={onChangeMaxValueHadler}
 							equal={equalValue}/>
 				</div>

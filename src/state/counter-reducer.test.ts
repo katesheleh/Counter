@@ -14,7 +14,8 @@ beforeEach(() => {
 	startState = {
 		startMinValue: 3,
 		startMaxValue: 8,
-		count: 3
+		count: 3,
+		btnDisabled: true
 	}
 })
 

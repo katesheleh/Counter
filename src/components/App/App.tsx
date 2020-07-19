@@ -8,12 +8,13 @@ import {AppRootStateType} from '../../state/store';
 import {
 	decrementCountAC,
 	incrementCountAC,
-	resetCountAC,
+	resetCountAC, setBtnBehaviorAC,
 	setCountAC,
 	SetMaxCountValueAC,
 	SetMinCountValueAC,
 	StateType
 } from '../../state/counter-reducer';
+
 
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
 		dispatch(resetCountAC(value))
 	}
 
+	const setBtnBehavior = (btnDisabled: boolean) => {
+		dispatch(setBtnBehaviorAC(btnDisabled))
+	}
+
 	return (
 			<div className="App">
 				<h1>Counter</h1>
@@ -66,6 +71,7 @@ function App() {
 								count={counterValues.count}
 								incrementCount={incrementCount}
 								decrementCount={decrementCount}
+								setCount={setCount}
 								resetCount={resetCount}
 						/>
 					</div>
