@@ -8,7 +8,7 @@ import {AppRootStateType} from '../../state/store';
 import {
 	decrementCountAC,
 	incrementCountAC,
-	resetCountAC, setBtnBehaviorAC,
+	resetCountAC,
 	setCountAC,
 	SetMaxCountValueAC,
 	SetMinCountValueAC,
@@ -29,8 +29,8 @@ function App() {
 		dispatch(SetMaxCountValueAC(value))
 	}
 
-	const setCount = (value: number) => {
-		dispatch(setCountAC(value))
+	const setCount = (value: number, max: number, min: number) => {
+		dispatch(setCountAC(value, max, min))
 	}
 
 	const incrementCount = () => {
@@ -45,10 +45,6 @@ function App() {
 		dispatch(resetCountAC(value))
 	}
 
-	const setBtnBehavior = (btnDisabled: boolean) => {
-		dispatch(setBtnBehaviorAC(btnDisabled))
-	}
-
 	return (
 			<div className="App">
 				<h1>Counter</h1>
@@ -60,18 +56,19 @@ function App() {
 								minValue={counterValues.startMinValue}
 								maxValue={counterValues.startMaxValue}
 								setCount={setCount}
+								min={counterValues.min}
+								max={counterValues.max}
 								setMinCountValue={setMinCountValue}
 								setMaxCountValue={setMaxCountValue}/>
 					</div>
 
 					<div className={styles.col}>
 						<Counter
-								minValue={counterValues.startMinValue}
-								maxValue={counterValues.startMaxValue}
+								minValue={counterValues.min}
+								maxValue={counterValues.max}
 								count={counterValues.count}
 								incrementCount={incrementCount}
 								decrementCount={decrementCount}
-								setCount={setCount}
 								resetCount={resetCount}
 						/>
 					</div>

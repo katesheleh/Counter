@@ -7,7 +7,6 @@ type CounterType = {
 	maxValue: number
 	minValue: number
 	count: number
-	setCount: (value: number) => void
 	incrementCount: () => void
 	decrementCount: () => void
 	resetCount: (value: number) => void
@@ -27,17 +26,17 @@ const Counter = (props: CounterType) => {
 					<Button
 							title='Increment'
 							action={props.incrementCount}
-							disabled={props.count === props.maxValue || props.minValue > props.maxValue || props.minValue === props.maxValue ? true : false}/>
+							disabled={props.count === props.maxValue ? true : false}/>
 
 					<Button
 							title='Decrement'
 							action={props.decrementCount}
-							disabled={props.count === props.minValue || props.minValue > props.maxValue || props.minValue === props.maxValue ? true : false}/>
+							disabled={props.count === props.minValue ? true : false}/>
 
 					<Button
 							title='Reset'
 							action={() => props.resetCount(props.minValue)}
-							disabled={props.count === props.minValue || props.minValue > props.maxValue || props.minValue === props.maxValue ? true : false}/>
+							disabled={props.count === props.minValue ? true : false}/>
 				</div>
 			</div>
 	)

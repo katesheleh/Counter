@@ -6,13 +6,15 @@ import Value from './Value/Value';
 type CounterValuesType = {
 	minValue: number
 	maxValue: number
-	setCount: (value: number) => void
+	min: number
+	max: number
+	setCount: (value: number, startMaxValue: number, startMinValue: number) => void
 	setMinCountValue: (value: number) => void
 	setMaxCountValue: (value: number) => void
 }
 
 const CounterValues = (props: CounterValuesType) => {
-
+	console.log(props)
 	const [equalValue, setEqualValue] = useState(true)
 
 	const onChangeMinValueHadler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +28,7 @@ const CounterValues = (props: CounterValuesType) => {
 	}
 
 	function setNewValues() {
-		props.setCount(props.minValue);
+		props.setCount(props.minValue, props.max, props.min);
 	}
 
 	return (

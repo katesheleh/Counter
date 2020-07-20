@@ -15,7 +15,8 @@ beforeEach(() => {
 		startMinValue: 3,
 		startMaxValue: 8,
 		count: 3,
-		btnDisabled: true
+		min: 0,
+		max: 0
 	}
 })
 
@@ -49,7 +50,7 @@ test('Reset count', () => {
 })
 
 
-test('Set count', () => {
-	const endState = counterValuesReducer(startState, resetCountAC(10))
-	expect(endState.count).toBe(10)
-})
+// test('Set count', () => {
+// 	const endState = counterValuesReducer(startState, resetCountAC(10))
+// 	expect(endState.count).toBe(10)
+// })

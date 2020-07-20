@@ -1,8 +1,9 @@
 export type StateType = {
 	startMinValue: number
 	startMaxValue: number
+	min: number
+	max: number
 	count: number
-	btnDisabled: boolean
 }
 
 export type SetMinCountValueType = {
@@ -26,6 +27,8 @@ export type DecrementCountType = {
 export type SetCountType = {
 	type: 'SET_COUNT'
 	count: number
+	startMinValue: number
+	startMaxValue: number
 }
 
 export type ResetCountType = {
@@ -33,46 +36,44 @@ export type ResetCountType = {
 	count: number
 }
 
-export type SetNewValueType = {
-	type: 'SET_BTN_BEHAVIOR'
-	btnDisabled: boolean
-}
-
-type ActionType = SetMinCountValueType | SetMaxCountValueType	| SetCountType
-		| IncrementCountType | DecrementCountType | ResetCountType | SetNewValueType
+type ActionType = SetMinCountValueType | SetMaxCountValueType | SetCountType
+		| IncrementCountType | DecrementCountType | ResetCountType
 
 export let initialState: StateType = {
 	startMinValue: 0,
 	startMaxValue: 0,
-	count: 0,
-	btnDisabled: true
+	min: 0,
+	max: 0,
+	count: 0
 }
 
 export const counterValuesReducer = (state = initialState, action: ActionType): StateType => {
 	switch (action.type) {
 		case 'SET_MIN_START_VALUE':
-			return {...state, startMinValue: action.startMinValue};
+			return {...state, startMinValue: action.startMinValue}
 
 		case 'SET_MAX_START_VALUE':
-			return {...state, startMaxValue: action.startMaxValue};
+			return {...state, startMaxValue: action.startMaxValue}
 
 		case 'INCREMENT_COUNT':
-			return {...state, count: state.count + 1};
+			return {...state, count: state.count + 1}
 
 		case 'DECREMENT_COUNT':
-			return {...state, count: state.count - 1};
+			return {...state, count: state.count - 1}
 
 		case 'RESET_COUNT':
-			return {...state, count: action.count};
+			return {...state, count: action.count}
 
 		case 'SET_COUNT' :
-			return {...state, count: action.count};
-
-		case 'SET_BTN_BEHAVIOR':
-			return {...state, btnDisabled: action.btnDisabled, }
+			return {
+				...state,
+				count: action.count,
+				max: state.startMaxValue,
+				min: state.startMinValue
+			}
 
 		default:
-			return state;
+			return state
 	}
 }
 
@@ -96,10 +97,6 @@ export const resetCountAC = (count: number): ResetCountType => {
 	return {type: 'RESET_COUNT', count: count}
 }
 
-export const setCountAC = (count: number): SetCountType => {
-	return {type: 'SET_COUNT', count: count}
-}
-
-export const setBtnBehaviorAC = (btnDisabled: boolean): SetNewValueType => {
-	return {type: 'SET_BTN_BEHAVIOR', btnDisabled: btnDisabled}
+export const setCountAC = (count: number, startMaxValue: number, startMinValue: number): SetCountType => {
+	return {type: 'SET_COUNT', count: count, startMaxValue: startMaxValue, startMinValue: startMinValue}
 }
