@@ -6,6 +6,8 @@ import CountValue from './CountValue/CountValue';
 type CounterType = {
 	maxValue: number
 	minValue: number
+	startMinValue: number
+	startMaxValue: number
 	count: number
 	incrementCount: () => void
 	decrementCount: () => void
@@ -19,8 +21,8 @@ const Counter = (props: CounterType) => {
 
 				<CountValue
 						value={props.count}
-						minValue={props.minValue}
-						maxValue={props.maxValue}/>
+						minValue={props.startMinValue}
+						maxValue={props.startMaxValue}/>
 
 				<div className={styles.counterBtns}>
 					<Button

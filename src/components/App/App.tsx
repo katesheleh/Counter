@@ -66,6 +66,8 @@ function App() {
 						<Counter
 								minValue={counterValues.min}
 								maxValue={counterValues.max}
+								startMinValue={counterValues.startMinValue}
+								startMaxValue={counterValues.startMaxValue}
 								count={counterValues.count}
 								incrementCount={incrementCount}
 								decrementCount={decrementCount}
